@@ -105,6 +105,18 @@ WORDPRESS_FRAME_ANCESTORS=http://localhost:8080,http://172.20.10.4:8080
 
 Use the actual WordPress origin/port for your environment.
 
+## Screenshots
+
+Widget closed:
+
+![Worknoon WordPress widget closed](https://raw.githubusercontent.com/Ennygabby01/screenshots/main/004.png)
+
+Widget open:
+
+![Worknoon WordPress widget open](https://raw.githubusercontent.com/Ennygabby01/screenshots/main/001.png)
+![Worknoon WordPress widget conversation](https://raw.githubusercontent.com/Ennygabby01/screenshots/main/002.png)
+![Worknoon WordPress widget embedded chat](https://raw.githubusercontent.com/Ennygabby01/screenshots/main/003.png)
+
 ## REST Routes
 
 `GET /wp-json/worknoon-chat/v1/config`
