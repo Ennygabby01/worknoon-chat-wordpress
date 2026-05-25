@@ -7,6 +7,15 @@
 
 WordPress plugin integration for the Worknoon realtime chat assessment.
 
+## Demo Video
+
+- [Worknoon Chat demo walkthrough](https://www.loom.com/share/7f0a051d7c7f46a9bf3c7261adcc0d0f)
+
+## Related Repositories
+
+- [Backend - API and realtime server](https://github.com/Ennygabby01/worknoon-chat-backend)
+- [Frontend - Next.js chat UI](https://github.com/Ennygabby01/worknoon-chat-frontend)
+
 ## Technologies
 
 - WordPress plugin API
