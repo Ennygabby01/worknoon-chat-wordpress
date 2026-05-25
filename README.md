@@ -1,5 +1,10 @@
 # Worknoon Chat WordPress
 
+![WordPress](https://img.shields.io/badge/WordPress-Plugin-21759B?logo=wordpress&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)
+![REST API](https://img.shields.io/badge/REST_API-Integration-0F766E)
+![Shortcode](https://img.shields.io/badge/Shortcode-Widget-17324D)
+
 WordPress plugin integration for the Worknoon realtime chat assessment.
 
 ## Technologies
@@ -124,11 +129,12 @@ The plugin keeps the WordPress integration thin:
 
 ## Challenges and Tradeoffs
 
-- The assessment allowed either a plugin or a Storefront child theme. A plugin was chosen because it is portable and directly satisfies the required custom post type, shortcode, and REST API integration.
-- The chat UI lives in the Next.js app, so WordPress stays responsible for embedding, settings, session records, and site context instead of duplicating the chat application.
-- The site-wide widget and shortcode use the same render path. The global toggle uses saved settings, while shortcode attributes can override context, title, URL, and position per page.
-- The widget records local `chat_session` posts only for authenticated WordPress users. The backend remains the source of truth for actual chat users, conversations, messages, and realtime state.
-- The widget scroll lock preserves any existing inline body overflow value before opening and restores it on close, avoiding conflicts with themes or other overlays.
+- The PDF allowed either a plugin or a Storefront child theme. I chose a plugin because the required deliverables were a custom post type, shortcode, and REST API integration, and a plugin is more portable for an ecommerce site.
+- I avoided rebuilding the chat UI inside WordPress. WordPress owns the embed shell, settings, `chat_session` records, and site context; the Next.js app owns the actual chat experience.
+- I had to clarify shortcode context values. `support`, `designer`, and `merchant` are not WordPress post types; they are chat-entry contexts passed to the frontend and stored with the local session record.
+- The site-wide toggle and shortcode needed to behave consistently. They now share the same render path: global settings drive the automatic widget, while shortcode attributes can override context, title, URL, and position per page.
+- The widget initially risked clobbering an existing page scroll-lock state. It now preserves any existing inline `body` overflow value and restores it when the panel closes.
+- The plugin records local sessions only for authenticated WordPress users. The backend remains the source of truth for chat users, conversations, messages, read state, and realtime behavior.
 
 ## Current Status
 
