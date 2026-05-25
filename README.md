@@ -2,6 +2,16 @@
 
 WordPress plugin integration for the Worknoon realtime chat assessment.
 
+## Technologies
+
+- WordPress plugin API
+- PHP 8.1+
+- WordPress REST API
+- Custom post types
+- Shortcodes
+- Vanilla JavaScript
+- CSS
+
 ## What It Provides
 
 - `chat_session` custom post type for local WordPress chat session records.
@@ -29,6 +39,16 @@ WordPress plugin integration for the Worknoon realtime chat assessment.
 5. Set the backend API URL for the active environment when direct backend calls are enabled.
 6. Enable **Site-wide Widget** to show the floating launcher on every public page, or add `[worknoon_chat]` to a specific page, post, or widget area.
 
+## Local Commands
+
+```bash
+make lint
+make package
+make clean
+```
+
+`make lint` runs PHP syntax checks. `make package` creates `dist/worknoon-chat.zip`.
+
 ## Shortcode
 
 ```text
@@ -52,6 +72,8 @@ Supported contexts:
 - `support`
 - `designer`
 - `merchant`
+
+The context is passed to the frontend iframe and stored on the local `chat_session` record. It is not a WordPress post type; it simply tells the chat frontend whether to start a support, designer, or merchant flow.
 
 Supported positions:
 
@@ -88,6 +110,32 @@ Returns public widget configuration.
 
 Creates a private `chat_session` post for the current WordPress user. Requires a valid `X-WP-Nonce` header.
 
+## Architecture
+
+The plugin keeps the WordPress integration thin:
+
+- `worknoon-chat.php` bootstraps constants, autoloading, activation, and deactivation.
+- `src/PostType/ChatSessionPostType.php` registers the `chat_session` custom post type.
+- `src/Settings/SettingsRepository.php` owns settings defaults and sanitization.
+- `src/Admin/AdminPage.php` renders and saves plugin settings.
+- `src/PublicView/ChatShortcode.php` renders the shortcode and site-wide widget.
+- `src/Rest/RestController.php` exposes the public config and session-record routes.
+- `assets/css` and `assets/js` contain separate admin and public widget assets.
+
+## Challenges and Tradeoffs
+
+- The assessment allowed either a plugin or a Storefront child theme. A plugin was chosen because it is portable and directly satisfies the required custom post type, shortcode, and REST API integration.
+- The chat UI lives in the Next.js app, so WordPress stays responsible for embedding, settings, session records, and site context instead of duplicating the chat application.
+- The site-wide widget and shortcode use the same render path. The global toggle uses saved settings, while shortcode attributes can override context, title, URL, and position per page.
+- The widget records local `chat_session` posts only for authenticated WordPress users. The backend remains the source of truth for actual chat users, conversations, messages, and realtime state.
+- The widget scroll lock preserves any existing inline body overflow value before opening and restores it on close, avoiding conflicts with themes or other overlays.
+
 ## Current Status
 
 This plugin covers the required WordPress path from the assessment: custom post type, shortcode, and REST integration surface. The public shortcode now renders a floating iframe widget pointed at the configured Next.js frontend.
+
+## Validation
+
+```bash
+make lint
+```
