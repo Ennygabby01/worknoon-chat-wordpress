@@ -1,0 +1,439 @@
+/* ============================================================
+   Worknoon Chat — Admin Settings
+   ============================================================ */
+
+/* Hard reset WP content padding on mobile */
+@media (max-width: 960px) {
+  #wpcontent,
+  #wpbody-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* ---- page shell ---- */
+.wn-settings {
+  --wn-accent: #0f766e;
+  --wn-accent-hover: #0d6460;
+  --wn-accent-subtle: rgba(15, 118, 110, 0.08);
+  --wn-text: #111827;
+  --wn-muted: #6b7280;
+  --wn-border: rgba(0, 0, 0, 0.08);
+  --wn-surface: #ffffff;
+  --wn-page: #f5f6f8;
+  --wn-radius: 12px;
+  --wn-radius-sm: 8px;
+  --wn-shadow: 0 1px 4px rgba(17, 24, 39, 0.07), 0 1px 2px rgba(17, 24, 39, 0.04);
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--wn-text);
+  max-width: 720px;
+  padding: 32px 24px 64px;
+  margin: 0;
+}
+
+.wn-settings *,
+.wn-settings *::before,
+.wn-settings *::after {
+  box-sizing: inherit;
+}
+
+/* ---- page header ---- */
+.wn-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.wn-header-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--wn-accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.wn-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wn-header-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--wn-text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.wn-header-version {
+  font-size: 0.75rem;
+  color: var(--wn-muted);
+  font-weight: 500;
+}
+
+/* ---- notice (WP save notice override) ---- */
+.wn-settings .notice,
+.wn-settings .updated,
+.wn-settings .error {
+  margin: 0 0 20px !important;
+  border-radius: var(--wn-radius-sm) !important;
+  border-left-width: 4px !important;
+  padding: 10px 14px !important;
+  font-size: 0.875rem !important;
+}
+
+/* ---- card ---- */
+.wn-card {
+  background: var(--wn-surface);
+  border-radius: var(--wn-radius);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.wn-card-head {
+  padding: 18px 20px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wn-card-head-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--wn-accent-subtle);
+  color: var(--wn-accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.wn-card-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--wn-text);
+  margin: 0;
+  line-height: 1;
+}
+
+.wn-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---- field ---- */
+.wn-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wn-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--wn-text);
+  display: block;
+}
+
+.wn-hint {
+  font-size: 0.75rem;
+  color: var(--wn-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.wn-settings input.wn-input,
+.wn-settings input.wn-input[type="text"],
+.wn-settings input.wn-input[type="url"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border: 1.5px solid #e2e4e9;
+  border-radius: var(--wn-radius-sm);
+  background: #fff;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--wn-text);
+  line-height: 1;
+  outline: none;
+  box-shadow: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.wn-settings input.wn-input:focus,
+.wn-settings input.wn-input[type="text"]:focus,
+.wn-settings input.wn-input[type="url"]:focus {
+  border-color: var(--wn-accent);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+  background: #fff;
+}
+
+.wn-settings input.wn-input::placeholder {
+  color: #a0a7b4;
+  font-weight: 400;
+}
+
+/* ---- field divider ---- */
+.wn-field-divider {
+  height: 1px;
+  background: var(--wn-border);
+  margin: 0 -20px;
+}
+
+/* ---- position picker ---- */
+.wn-position-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.wn-position-card {
+  position: relative;
+}
+
+.wn-position-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.wn-position-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px;
+  border: 1.5px solid var(--wn-border);
+  border-radius: var(--wn-radius-sm);
+  cursor: pointer;
+  background: var(--wn-page);
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
+
+.wn-position-card input[type="radio"]:checked + .wn-position-label {
+  border-color: var(--wn-accent);
+  background: var(--wn-accent-subtle);
+}
+
+.wn-position-card input[type="radio"]:focus-visible + .wn-position-label {
+  outline: 2px solid var(--wn-accent);
+  outline-offset: 2px;
+}
+
+.wn-position-preview {
+  width: 72px;
+  height: 48px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wn-position-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--wn-accent);
+  position: absolute;
+  bottom: 6px;
+}
+
+.wn-position-dot--right { right: 6px; }
+.wn-position-dot--left  { left: 6px; }
+
+.wn-position-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--wn-text);
+}
+
+.wn-position-card input[type="radio"]:checked + .wn-position-label .wn-position-text {
+  color: var(--wn-accent);
+}
+
+/* ---- context picker ---- */
+.wn-context-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wn-context-card {
+  position: relative;
+}
+
+.wn-context-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.wn-context-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--wn-border);
+  border-radius: 999px;
+  cursor: pointer;
+  background: var(--wn-page);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--wn-muted);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.wn-context-card input[type="radio"]:checked + .wn-context-pill {
+  border-color: var(--wn-accent);
+  background: var(--wn-accent-subtle);
+  color: var(--wn-accent);
+}
+
+.wn-context-card input[type="radio"]:focus-visible + .wn-context-pill {
+  outline: 2px solid var(--wn-accent);
+  outline-offset: 2px;
+}
+
+/* ---- toggle ---- */
+.wn-toggle-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wn-toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.wn-toggle-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.wn-toggle-wrap input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.wn-toggle-track {
+  display: block;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.wn-toggle-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  transition: transform 0.18s;
+}
+
+.wn-toggle-wrap input[type="checkbox"]:checked + .wn-toggle-track {
+  background: var(--wn-accent);
+}
+
+.wn-toggle-wrap input[type="checkbox"]:focus-visible + .wn-toggle-track {
+  outline: 2px solid var(--wn-accent);
+  outline-offset: 2px;
+}
+
+.wn-toggle-wrap input[type="checkbox"]:checked + .wn-toggle-track::after {
+  transform: translateX(18px);
+}
+
+/* ---- save button ---- */
+.wn-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.wn-submit {
+  height: 42px;
+  padding: 0 28px;
+  background: var(--wn-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--wn-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.12s;
+}
+
+.wn-submit:hover:not(:disabled) {
+  background: var(--wn-accent-hover);
+}
+
+.wn-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.wn-submit:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.wn-submit--saved {
+  background: #15803d !important;
+}
+
+.wn-submit--error {
+  background: #b91c1c !important;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 600px) {
+  .wn-settings {
+    padding: 20px 16px 48px;
+  }
+
+  .wn-card-head,
+  .wn-card-body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .wn-field-divider {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .wn-position-preview {
+    width: 56px;
+    height: 38px;
+  }
+}

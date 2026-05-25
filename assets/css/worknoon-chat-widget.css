@@ -19,23 +19,25 @@
 
 .worknoon-chat-widget__launcher {
   align-items: center;
-  background: #17324d;
+  background: #0f766e;
   border: 0;
   border-radius: 999px;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.22);
   color: #ffffff;
   cursor: pointer;
   display: inline-flex;
   height: var(--worknoon-chat-launcher-size);
   justify-content: center;
   padding: 0;
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  transition: transform 160ms ease;
   width: var(--worknoon-chat-launcher-size);
 }
 
 .worknoon-chat-widget__launcher:hover {
-  box-shadow: 0 22px 54px rgba(15, 23, 42, 0.28);
-  transform: translateY(-2px);
+  background: #0f766e;
+  border-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  transform: scale(1.08);
 }
 
 .worknoon-chat-widget__launcher:focus-visible,
@@ -45,6 +47,19 @@
 }
 
 .worknoon-chat-widget__launcher-icon {
+  display: inline-flex;
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.worknoon-chat-widget__launcher-icon--close {
+  display: none;
+}
+
+.worknoon-chat-widget.is-open .worknoon-chat-widget__launcher-icon--chat {
+  display: none;
+}
+
+.worknoon-chat-widget.is-open .worknoon-chat-widget__launcher-icon--close {
   display: inline-flex;
 }
 
@@ -57,59 +72,116 @@
   display: flex;
   flex-direction: column;
   height: min(680px, calc(100vh - 116px));
+  opacity: 0;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
+  transform: scale(0.92) translateY(12px);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 0s 220ms;
+  visibility: hidden;
   width: min(390px, calc(100vw - 40px));
-}
-
-.worknoon-chat-widget--bottom-right .worknoon-chat-widget__panel {
-  right: 0;
-}
-
-.worknoon-chat-widget--bottom-left .worknoon-chat-widget__panel {
-  left: 0;
 }
 
 .worknoon-chat-widget__panel[hidden] {
   display: none;
 }
 
+.worknoon-chat-widget--bottom-right .worknoon-chat-widget__panel {
+  right: 0;
+  transform-origin: bottom right;
+}
+
+.worknoon-chat-widget--bottom-left .worknoon-chat-widget__panel {
+  left: 0;
+  transform-origin: bottom left;
+}
+
+.worknoon-chat-widget.is-open .worknoon-chat-widget__panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 0s 0s;
+  visibility: visible;
+}
+
 .worknoon-chat-widget__header {
   align-items: center;
-  background: #f6f8fa;
-  border-bottom: 1px solid rgba(23, 50, 77, 0.1);
+  background: #0f766e;
   display: flex;
   gap: 12px;
   justify-content: space-between;
-  min-height: 54px;
-  padding: 12px 14px;
+  min-height: 62px;
+  padding: 12px 14px 12px 16px;
+}
+
+.worknoon-chat-widget__header-avatar {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.worknoon-chat-widget__header-meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .worknoon-chat-widget__title {
-  color: #17324d;
-  font-size: 15px;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.3;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.worknoon-chat-widget__status {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.65);
+  display: inline-flex;
+  font-size: 11px;
+  gap: 5px;
+  line-height: 1;
+}
+
+.worknoon-chat-widget__status-dot {
+  background: #4ade80;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  height: 7px;
+  width: 7px;
 }
 
 .worknoon-chat-widget__close {
   align-items: center;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   border: 0;
-  border-radius: 999px;
-  color: #52616f;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   display: inline-flex;
-  height: 34px;
+  flex-shrink: 0;
+  height: 32px;
   justify-content: center;
   padding: 0;
-  width: 34px;
+  transition: background 140ms ease, color 140ms ease;
+  width: 32px;
 }
 
 .worknoon-chat-widget__close:hover {
-  background: rgba(23, 50, 77, 0.08);
-  color: #17324d;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .worknoon-chat-widget__iframe {

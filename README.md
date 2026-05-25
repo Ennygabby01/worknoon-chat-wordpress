@@ -24,7 +24,7 @@ WordPress plugin integration for the Worknoon realtime chat assessment.
 
 1. Copy this folder into `wp-content/plugins/worknoon-chat`.
 2. Activate **Worknoon Chat** from the WordPress admin plugins screen.
-3. Open **Settings > Worknoon Chat**.
+3. Open **Chat Sessions > Settings**.
 4. Set the frontend app URL for the active Next.js chat environment.
 5. Set the backend API URL for the active environment when direct backend calls are enabled.
 6. Enable **Site-wide Widget** to show the floating launcher on every public page, or add `[worknoon_chat]` to a specific page, post, or widget area.

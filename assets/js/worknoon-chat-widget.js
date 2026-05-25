@@ -1,5 +1,9 @@
 (function () {
   const config = window.WorknoonChat;
+  const scrollLock = {
+    count: 0,
+    previousOverflow: '',
+  };
 
   document.querySelectorAll('[data-worknoon-chat]').forEach((widget) => {
     const toggle = widget.querySelector('[data-worknoon-chat-toggle]');
@@ -36,17 +40,36 @@
       }
     }
 
+    function lockScroll() {
+      if (scrollLock.count === 0) {
+        scrollLock.previousOverflow = document.body.style.overflow;
+      }
+
+      scrollLock.count += 1;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function unlockScroll() {
+      scrollLock.count = Math.max(0, scrollLock.count - 1);
+
+      if (scrollLock.count === 0) {
+        document.body.style.overflow = scrollLock.previousOverflow;
+        scrollLock.previousOverflow = '';
+      }
+    }
+
     function openPanel() {
+      panel.removeAttribute('hidden');
       widget.classList.add('is-open');
-      panel.hidden = false;
       toggle.setAttribute('aria-expanded', 'true');
+      lockScroll();
       void recordSession();
     }
 
     function closePanel() {
       widget.classList.remove('is-open');
-      panel.hidden = true;
       toggle.setAttribute('aria-expanded', 'false');
+      unlockScroll();
       toggle.focus();
     }
 
